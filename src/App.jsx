@@ -1,56 +1,51 @@
 import './App.css'
 import Card from './components/Card'
+import links from './data/links'
+import avisos from './data/avisos'
 
 function App() {
   return (
     <main className="page">
       <section className="hero">
         <p className="eyebrow">Portal acadêmico</p>
+
         <h1>⚖️ Turma A - Direito</h1>
+
         <h2>4º semestre • só faltam mais 6! 💜</h2>
+
         <p>
           Links, avisos, arquivos, ferramentas e pequenas provas de que estamos sobrevivendo.
         </p>
       </section>
 
       <section className="grid">
-        <article className="card">
-          <h3>📢 Avisos</h3>
+        <Card titulo="📢 Avisos">
           <ul>
-            <li>APS - data a confirmar</li>
-            <li>Próximas provas - em breve</li>
-            <li>Atualizações da turma aparecem aqui</li>
+            {avisos.map((aviso) => (
+              <li key={aviso}>{aviso}</li>
+            ))}
           </ul>
-        </article>
+        </Card>
 
-    <Card titulo="📢 Avisos">
-  <ul>
-    <li>APS - data a confirmar</li>
-    <li>Próximas provas - em breve</li>
-    <li>Atualizações da turma aparecem aqui</li>
-  </ul>
-</Card>
-<Card titulo="🔗 Links úteis">
-  <ul>
-    <li>LevelUp</li>
-    <li>Lyceum</li>
-    <li>Manual do Aluno</li>
-    <li>Drive da Turma</li>
-  </ul>
-</Card>
-        <article className="card">
-          <h3>🧮 Calculadora de média</h3>
+        <Card titulo="🔗 Links úteis">
+          <ul>
+            {links.map((link) => (
+              <li key={link}>{link}</li>
+            ))}
+          </ul>
+        </Card>
+
+        <Card titulo="🧮 Calculadora de média">
           <p>
             Em breve: descubra quanto precisa tirar sem abrir uma planilha amaldiçoada.
           </p>
-        </article>
+        </Card>
 
-        <article className="card">
-          <h3>🕰️ Cápsula do Tempo</h3>
+        <Card titulo="🕰️ Cápsula do Tempo">
           <p>
             Memórias, pérolas, mensagens e registros da Turma A até a formatura.
           </p>
-        </article>
+        </Card>
       </section>
     </main>
   )
