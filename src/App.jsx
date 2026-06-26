@@ -1,5 +1,6 @@
 import './App.css'
 import Card from './components/Card'
+import CalculadoraMedia from './components/CalculadoraMedia'
 import links from './data/links'
 import avisos from './data/avisos'
 
@@ -36,9 +37,7 @@ function App() {
         </Card>
 
         <Card titulo="🧮 Calculadora de média">
-          <p>
-            Em breve: descubra quanto precisa tirar sem abrir uma planilha amaldiçoada.
-          </p>
+          <CalculadoraMedia />
         </Card>
 
         <Card titulo="🕰️ Cápsula do Tempo">
