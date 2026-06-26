@@ -1,7 +1,11 @@
 import './App.css'
 import Card from './components/Card'
+import AchadosPerdidos from './components/AchadosPerdidos'
+import AgendaHoje from './components/AgendaHoje'
 import CalculadoraMedia from './components/CalculadoraMedia'
-import links from './data/links'
+import Contatos from './components/Contatos'
+import Entregas from './components/Entregas'
+import LinksUteis from './components/LinksUteis'
 import avisos from './data/avisos'
 
 function App() {
@@ -19,6 +23,8 @@ function App() {
         </p>
       </section>
 
+      <AgendaHoje />
+
       <section className="grid">
         <Card titulo="📢 Avisos">
           <ul>
@@ -29,15 +35,23 @@ function App() {
         </Card>
 
         <Card titulo="🔗 Links úteis">
-          <ul>
-            {links.map((link) => (
-              <li key={link}>{link}</li>
-            ))}
-          </ul>
+          <LinksUteis />
         </Card>
 
         <Card titulo="🧮 Calculadora de média">
           <CalculadoraMedia />
+        </Card>
+
+        <Card titulo="📌 APS e entregas">
+          <Entregas />
+        </Card>
+
+        <Card titulo="📬 Contatos">
+          <Contatos />
+        </Card>
+
+        <Card titulo="🔎 Achados e perdidos">
+          <AchadosPerdidos />
         </Card>
 
         <Card titulo="🕰️ Cápsula do Tempo">
