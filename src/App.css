@@ -12,6 +12,7 @@
   padding: 32px;
   border-radius: 24px;
   background: #211035;
+  text-align: center;
 }
 
 .eyebrow {
@@ -23,11 +24,13 @@
 }
 
 .hero h1 {
-  margin: 0;
+  margin: 8px 0 0;
   font-size: 2.5rem;
+  line-height: 1.1;
 }
 
 .hero h2 {
+  margin-top: 8px;
   color: #d8b4fe;
 }
 
@@ -40,7 +43,7 @@
   max-width: 900px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -49,6 +52,7 @@
   border-radius: 20px;
   background: #2d1745;
   border: 1px solid #6b21a8;
+  text-align: center;
 }
 
 .card h3 {
@@ -60,24 +64,6 @@
   color: #f3e8ff;
 }
 
-.hero {
-  text-align: center;
-}
-
-.hero h1 {
-  margin: 8px 0 0;
-  font-size: 2.5rem;
-  line-height: 1.1;
-}
-
-.hero h2 {
-  margin-top: 8px;
-}
-
-.card {
-  text-align: center;
-}
-
 .card ul {
   list-style: none;
   padding: 0;
@@ -85,4 +71,72 @@
 
 .card li {
   margin: 6px 0;
+}
+
+.calculator {
+  display: grid;
+  gap: 16px;
+}
+
+.calculator-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.calculator label {
+  display: grid;
+  gap: 6px;
+  color: #e9d5ff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.calculator input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #7e22ce;
+  border-radius: 10px;
+  padding: 10px;
+  background: #160a25;
+  color: #f7f0ff;
+  font: inherit;
+}
+
+.calculator input:focus {
+  border-color: #c084fc;
+  outline: 2px solid rgba(192, 132, 252, 0.3);
+}
+
+.calculator-result {
+  display: block;
+  min-height: 44px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(192, 132, 252, 0.12);
+  color: #f3e8ff;
+  font-weight: 700;
+}
+
+.calculator-result.ok {
+  background: rgba(34, 197, 94, 0.18);
+}
+
+.calculator-result.alerta {
+  background: rgba(251, 146, 60, 0.18);
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 24px 16px;
+  }
+
+  .hero {
+    padding: 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
