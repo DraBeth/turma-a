@@ -73,6 +73,167 @@
   margin: 6px 0;
 }
 
+.agenda {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 20px;
+}
+
+.today-panel,
+.next-events {
+  padding: 24px;
+  border-radius: 20px;
+  background: #211035;
+  border: 1px solid #6b21a8;
+}
+
+.tag {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(192, 132, 252, 0.16);
+  color: #d8b4fe;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.today-panel h3,
+.lost-found h4,
+.delivery-item h4 {
+  margin: 10px 0 6px;
+}
+
+.today-panel small,
+.next-events small,
+.contacts small,
+.lost-found small {
+  color: #d8b4fe;
+}
+
+.next-events h4 {
+  margin: 0 0 10px;
+}
+
+.next-events ul,
+.contacts ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.next-events li,
+.contacts li {
+  display: grid;
+  gap: 2px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(18, 7, 31, 0.55);
+}
+
+.link-list,
+.delivery-list,
+.contacts,
+.lost-found {
+  display: grid;
+  gap: 12px;
+}
+
+.link-list a {
+  display: grid;
+  gap: 3px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(18, 7, 31, 0.55);
+  color: #f3e8ff;
+  text-align: left;
+  text-decoration: none;
+}
+
+.link-list a:hover,
+.contacts a:hover {
+  color: #f0abfc;
+}
+
+.link-list span,
+.delivery-item p,
+.lost-found p {
+  color: #e9d5ff;
+}
+
+.delivery-item {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(18, 7, 31, 0.55);
+  text-align: left;
+}
+
+.delivery-item > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #facc15;
+}
+
+.status-dot.concluido {
+  background: #22c55e;
+}
+
+.delivery-item dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.delivery-item dl div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+}
+
+.delivery-item dt {
+  color: #d8b4fe;
+  font-weight: 800;
+}
+
+.delivery-item dd {
+  margin: 0;
+}
+
+.contacts input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #7e22ce;
+  border-radius: 10px;
+  padding: 10px;
+  background: #160a25;
+  color: #f7f0ff;
+  font: inherit;
+}
+
+.contacts li {
+  text-align: left;
+}
+
+.contacts a {
+  color: #e9d5ff;
+  overflow-wrap: anywhere;
+}
+
 .calculator {
   display: grid;
   gap: 16px;
@@ -142,6 +303,10 @@
   }
 
   .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agenda {
     grid-template-columns: 1fr;
   }
 }
