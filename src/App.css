@@ -145,7 +145,8 @@
   gap: 12px;
 }
 
-.link-list a {
+.link-list a,
+.link-placeholder {
   display: grid;
   gap: 3px;
   padding: 12px;
@@ -154,6 +155,10 @@
   color: #f3e8ff;
   text-align: left;
   text-decoration: none;
+}
+
+.link-placeholder {
+  border: 1px dashed rgba(216, 180, 254, 0.35);
 }
 
 .link-list a:hover,
