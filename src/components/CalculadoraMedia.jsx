@@ -1,14 +1,22 @@
 import { useMemo, useState } from 'react'
 
-const clampNota = (nota) => Math.min(Math.max(nota, 0), 10)
-const clampInstrumentoN2 = (nota) => Math.min(Math.max(nota, 0), 9)
-const clampAps = (nota) => Math.min(Math.max(nota, 0), 1)
-
 const parseNota = (valor) => {
   if (valor.trim() === '') return null
 
   const numero = Number(valor.replace(',', '.'))
-  return Number.isFinite(numero) ? clampNota(numero) : null
+  return Number.isFinite(numero) ? numero : null
+}
+
+const atualizaNota = (setValor, maximo, valorDigitado) => {
+  const valor = valorDigitado.replace('.', ',')
+
+  if (!/^\d{0,2}(,\d{0,2})?$/.test(valor)) return
+
+  const numero = parseNota(valor)
+
+  if (numero !== null && numero > maximo) return
+
+  setValor(valor)
 }
 
 const formatNota = (nota) =>
@@ -26,15 +34,13 @@ function CalculadoraMedia() {
 
   const resultado = useMemo(() => {
     const nota1 = parseNota(n1)
-    const provaN2Raw = parseNota(instrumentoN2)
-    const notaApsRaw = parseNota(aps)
-    const provaN2 = provaN2Raw === null ? null : clampInstrumentoN2(provaN2Raw)
-    const notaAps = notaApsRaw === null ? null : clampAps(notaApsRaw)
+    const provaN2 = parseNota(instrumentoN2)
+    const notaAps = parseNota(aps)
     const notaSub = parseNota(n3)
     const mediaAlvo = parseNota(meta) ?? 6
     const n2Informada = provaN2 !== null || notaAps !== null
     const nota2 = n2Informada
-      ? clampNota((provaN2 ?? 0) + (notaAps ?? 0))
+      ? (provaN2 ?? 0) + (notaAps ?? 0)
       : null
     const n2ComSub = notaSub !== null && nota2 !== null
       ? Math.max(nota2, notaSub)
@@ -135,7 +141,7 @@ function CalculadoraMedia() {
             inputMode="decimal"
             placeholder="ex.: 8,5"
             value={n1}
-            onChange={(event) => setN1(event.target.value)}
+            onChange={(event) => atualizaNota(setN1, 10, event.target.value)}
           />
         </label>
 
@@ -145,7 +151,7 @@ function CalculadoraMedia() {
             inputMode="decimal"
             placeholder="0 a 9"
             value={instrumentoN2}
-            onChange={(event) => setInstrumentoN2(event.target.value)}
+            onChange={(event) => atualizaNota(setInstrumentoN2, 9, event.target.value)}
           />
         </label>
 
@@ -155,7 +161,7 @@ function CalculadoraMedia() {
             inputMode="decimal"
             placeholder="0 a 1"
             value={aps}
-            onChange={(event) => setAps(event.target.value)}
+            onChange={(event) => atualizaNota(setAps, 1, event.target.value)}
           />
         </label>
 
@@ -165,7 +171,7 @@ function CalculadoraMedia() {
             inputMode="decimal"
             placeholder="opcional"
             value={n3}
-            onChange={(event) => setN3(event.target.value)}
+            onChange={(event) => atualizaNota(setN3, 10, event.target.value)}
           />
         </label>
 
@@ -174,7 +180,7 @@ function CalculadoraMedia() {
           <input
             inputMode="decimal"
             value={meta}
-            onChange={(event) => setMeta(event.target.value)}
+            onChange={(event) => atualizaNota(setMeta, 10, event.target.value)}
           />
         </label>
       </div>
