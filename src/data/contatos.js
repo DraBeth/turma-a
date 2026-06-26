@@ -52,7 +52,7 @@ const contatos = [
   ['Pedro Henrique Abreu Benatto', 'pedro.benatto@fmu.br'],
   ['Riccardo Marcori Varalli', 'riccardo.varalli@fmu.br'],
   ['Roberta Carneiro de Melo', 'roberta.melo@fmu.br'],
-  ['Robson Aparecido do Amaral Kublicas', 'robson.kublickas@fmu.br'],
+  ['Robson Aparecido do Amaral Kublickas', 'robson.kublickas@fmu.br'],
   ['Rodolfo de Moraes Machado Neto', 'rodolfo.neto@fmu.br'],
   ['Ruy Alberto Leme Cavalheiro', 'ruy.cavalheiro@fmu.br'],
   ['Stephanie Carolyn Perez', 'stephanie.perez@fmu.br'],
