@@ -115,6 +115,21 @@
   color: #d8b4fe;
 }
 
+.source-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.source-row span {
+  border: 1px solid rgba(216, 180, 254, 0.28);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: #e9d5ff;
+  font-size: 0.76rem;
+}
+
 .next-events h4 {
   margin: 0 0 10px;
 }
