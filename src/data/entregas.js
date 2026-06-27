@@ -7,6 +7,9 @@ const entregas = [
     entrega: 'Portal, fisica ou ambos',
     observacao: 'Substituir este item pelas APS reais do proximo semestre.',
     status: 'pendente',
+    fonte: 'A confirmar',
+    atualizadoEm: '2026-06-26',
+    atualizadoPor: 'Beth',
   },
 ]
 
