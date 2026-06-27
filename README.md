@@ -5,6 +5,8 @@ Portal simples da Turma A para reunir avisos, links uteis e ferramentas de apoio
 ## Funcionalidades atuais
 
 - Painel automatico de hoje e proximos eventos
+- Excecoes de agenda por data especifica
+- Selos de fonte, atualizacao e responsavel nas informacoes sensiveis
 - Avisos da turma
 - Links uteis
 - Calculadora de media ponderada: N1 40%, N2 60%, APS e SUB/N3
