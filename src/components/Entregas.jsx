@@ -1,5 +1,13 @@
 import entregas from '../data/entregas'
 
+const formatarData = (dataIso) => {
+  const [ano, mes, dia] = dataIso.split('-').map(Number)
+  return new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+  })
+}
+
 function Entregas() {
   return (
     <div className="delivery-list">
@@ -25,6 +33,11 @@ function Entregas() {
             </div>
           </dl>
           <p>{entrega.observacao}</p>
+          <div className="source-row">
+            <span>Fonte: {entrega.fonte}</span>
+            <span>Atualizado em: {formatarData(entrega.atualizadoEm)}</span>
+            <span>Por: {entrega.atualizadoPor}</span>
+          </div>
         </article>
       ))}
     </div>
