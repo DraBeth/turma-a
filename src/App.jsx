@@ -4,6 +4,7 @@ import AchadosPerdidos from './components/AchadosPerdidos'
 import AgendaHoje from './components/AgendaHoje'
 import CalculadoraMedia from './components/CalculadoraMedia'
 import Contatos from './components/Contatos'
+import Disciplinas from './components/Disciplinas'
 import Entregas from './components/Entregas'
 import LinksUteis from './components/LinksUteis'
 import avisos from './data/avisos'
@@ -26,6 +27,10 @@ function App() {
       <AgendaHoje />
 
       <section className="grid">
+        <Card titulo="📚 Disciplinas do 4º semestre" className="card-wide">
+          <Disciplinas />
+        </Card>
+
         <Card titulo="📢 Avisos">
           <ul>
             {avisos.map((aviso) => (

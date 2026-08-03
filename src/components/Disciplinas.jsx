@@ -1,0 +1,57 @@
+import disciplinas from '../data/disciplinas'
+import contatos from '../data/contatos'
+
+function Disciplinas() {
+  return (
+    <div className="subjects">
+      <div className="subjects-summary">
+        <div>
+          <span>Período letivo</span>
+          <strong>2026.2</strong>
+        </div>
+        <div>
+          <span>Início previsto</span>
+          <strong>17/08/2026</strong>
+        </div>
+        <div>
+          <span>Grade semanal</span>
+          <strong>Aguardando divulgação</strong>
+        </div>
+      </div>
+
+      <div className="subject-list">
+        {disciplinas.map((disciplina) => {
+          const contato = contatos.find((item) => item.nome === disciplina.professor)
+
+          return (
+            <article className="subject-item" key={disciplina.nome}>
+              <span className="subject-status">Matriculado</span>
+              <h4>{disciplina.nome}</h4>
+              <p>
+                <span>Docente</span>
+                {contato ? (
+                  <a href={`mailto:${contato.email}`}>{disciplina.professor}</a>
+                ) : (
+                  <strong>{disciplina.professor}</strong>
+                )}
+              </p>
+              {disciplina.observacao && <small>{disciplina.observacao}</small>}
+            </article>
+          )
+        })}
+      </div>
+
+      <p className="subjects-note">
+        Dias, salas e modalidades presencial/EaD ainda não foram divulgados.
+      </p>
+
+      <div className="source-row">
+        <span>Fonte: Portal do Aluno</span>
+        <span>Atualizado em: 03/08</span>
+        <span>Por: Beth</span>
+      </div>
+    </div>
+  )
+}
+
+export default Disciplinas

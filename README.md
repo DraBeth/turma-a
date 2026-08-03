@@ -5,6 +5,7 @@ Portal simples da Turma A para reunir avisos, links uteis e ferramentas de apoio
 ## Funcionalidades atuais
 
 - Painel automatico de hoje e proximos eventos
+- Quadro de disciplinas, docentes e inicio do periodo letivo
 - Excecoes de agenda por data especifica
 - Selos de fonte, atualizacao e responsavel nas informacoes sensiveis
 - Avisos da turma

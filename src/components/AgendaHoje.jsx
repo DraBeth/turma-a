@@ -45,8 +45,10 @@ function AgendaHoje() {
         <h3>{itemDeHoje?.disciplina ?? 'Sem aula cadastrada'}</h3>
         <p>
           {itemDeHoje
-            ? `${itemDeHoje.horario} - Sala ${itemDeHoje.sala}`
-            : 'Dia livre ou agenda ainda nao alimentada.'}
+            ? itemDeHoje.horario && itemDeHoje.sala
+              ? `${itemDeHoje.horario} - Sala ${itemDeHoje.sala}`
+              : 'Horário e sala ainda não confirmados.'
+            : 'Dia sem aula cadastrada ou grade ainda não publicada.'}
         </p>
         {itemDeHoje?.observacao && <small>{itemDeHoje.observacao}</small>}
         <FonteInfo item={itemDeHoje} />

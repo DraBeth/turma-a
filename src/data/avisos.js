@@ -1,7 +1,7 @@
 const avisos = [
-  "APS - data a confirmar",
-  "Próximas provas - em breve",
-  "Atualizações da turma aparecem aqui"
+  'Semestre 2026.2 com início previsto para 17/08',
+  'Dias, salas e modalidades ainda não foram divulgados',
+  'Metodologia Científica ainda aparece sem docente definido',
 ]
 
 export default avisos

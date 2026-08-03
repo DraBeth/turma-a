@@ -59,6 +59,10 @@
   margin-top: 0;
 }
 
+.card-wide {
+  grid-column: 1 / -1;
+}
+
 .card li,
 .card p {
   color: #f3e8ff;
@@ -155,9 +159,82 @@
 .link-list,
 .delivery-list,
 .contacts,
-.lost-found {
+.lost-found,
+.subjects {
   display: grid;
   gap: 12px;
+}
+
+.subjects-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.subjects-summary div,
+.subject-item,
+.empty-state {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(18, 7, 31, 0.55);
+  text-align: left;
+}
+
+.subjects-summary span,
+.subject-item p span,
+.subject-item small,
+.empty-state span {
+  color: #d8b4fe;
+  font-size: 0.82rem;
+}
+
+.subject-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.subject-item h4,
+.subject-item p {
+  margin: 0;
+}
+
+.subject-item p {
+  display: grid;
+  gap: 2px;
+}
+
+.subject-item a {
+  color: #f3e8ff;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration-color: rgba(216, 180, 254, 0.55);
+  text-underline-offset: 3px;
+}
+
+.subject-item a:hover {
+  color: #f0abfc;
+}
+
+.subject-status {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.subjects-note {
+  padding: 10px 12px;
+  border: 1px dashed rgba(216, 180, 254, 0.35);
+  border-radius: 12px;
+  text-align: left;
 }
 
 .link-list a,
@@ -327,6 +404,11 @@
   }
 
   .agenda {
+    grid-template-columns: 1fr;
+  }
+
+  .subjects-summary,
+  .subject-list {
     grid-template-columns: 1fr;
   }
 }
