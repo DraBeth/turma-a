@@ -51,7 +51,7 @@ function App() {
           <Entregas />
         </Card>
 
-        <Card titulo="📬 Contatos">
+        <Card titulo="📬 Contatos" className="card-wide">
           <Contatos />
         </Card>
 

@@ -147,6 +147,10 @@
   padding: 0;
 }
 
+.contacts ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .next-events li,
 .contacts li {
   display: grid;
@@ -408,7 +412,8 @@
   }
 
   .subjects-summary,
-  .subject-list {
+  .subject-list,
+  .contacts ul {
     grid-template-columns: 1fr;
   }
 }
