@@ -1,7 +1,8 @@
 const links = [
   {
     titulo: 'Drive da Turma',
-    descricao: 'Materiais, PDFs, gabaritos e arquivos compartilhados. Link direto mantido na descricao do grupo.',
+    descricao: 'O link direto ainda não foi cadastrado aqui. Por enquanto, ele continua na descrição do grupo.',
+    status: 'Pendente no portal',
     url: '#',
   },
   {
