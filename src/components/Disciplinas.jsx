@@ -20,22 +20,26 @@ function Disciplinas() {
       </div>
 
       <div className="subject-list">
-        {disciplinas.map((disciplina) => {
+        {disciplinas.map((disciplina, index) => {
           const contato = contatos.find((item) => item.nome === disciplina.professor)
 
           return (
             <article className="subject-item" key={disciplina.nome}>
-              <span className="subject-status">Matriculado</span>
-              <h4>{disciplina.nome}</h4>
-              <p>
-                <span>Docente</span>
-                {contato ? (
-                  <a href={`mailto:${contato.email}`}>{disciplina.professor}</a>
-                ) : (
-                  <strong>{disciplina.professor}</strong>
-                )}
-              </p>
-              {disciplina.observacao && <small>{disciplina.observacao}</small>}
+              <span className="subject-number">{String(index + 1).padStart(2, '0')}</span>
+              <div className="subject-copy">
+                <span className="subject-status">Matriculado</span>
+                <h4>{disciplina.nome}</h4>
+                <p>
+                  <span>Docente</span>
+                  {contato ? (
+                    <a href={`mailto:${contato.email}`}>{disciplina.professor}</a>
+                  ) : (
+                    <strong>{disciplina.professor}</strong>
+                  )}
+                </p>
+                {disciplina.observacao && <small>{disciplina.observacao}</small>}
+              </div>
+              <span className="subject-arrow" aria-hidden="true">↗</span>
             </article>
           )
         })}
