@@ -880,6 +880,12 @@
   background: rgba(201, 240, 74, 0.1);
 }
 
+.calculator-result.parcial {
+  border-color: rgba(201, 240, 74, 0.3);
+  color: #f4f8e8;
+  background: rgba(201, 240, 74, 0.07);
+}
+
 .calculator-result.alerta {
   border-color: rgba(245, 180, 52, 0.45);
   background: rgba(245, 180, 52, 0.09);
