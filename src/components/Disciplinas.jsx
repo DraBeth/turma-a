@@ -14,8 +14,8 @@ function Disciplinas() {
           <strong>17/08/2026</strong>
         </div>
         <div>
-          <span>Grade semanal</span>
-          <strong>Aguardando divulgação</strong>
+          <span>Disciplinas</span>
+          <strong>{disciplinas.length}</strong>
         </div>
       </div>
 
@@ -27,7 +27,6 @@ function Disciplinas() {
             <article className="subject-item" key={disciplina.nome}>
               <span className="subject-number">{String(index + 1).padStart(2, '0')}</span>
               <div className="subject-copy">
-                <span className="subject-status">Matriculado</span>
                 <h4>{disciplina.nome}</h4>
                 <p>
                   <span>Docente</span>
