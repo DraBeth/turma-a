@@ -319,8 +319,8 @@
 }
 
 .shortcut-copy small {
-  color: #bcaec3;
-  font-size: 0.65rem;
+  color: #d0c4d5;
+  font-size: 0.69rem;
   line-height: 1.35;
 }
 
@@ -370,8 +370,8 @@
 
 .section-title p {
   margin-top: 8px;
-  color: #76687d;
-  font-size: 0.8rem;
+  color: #67596e;
+  font-size: 0.84rem;
 }
 
 .agenda {
@@ -473,8 +473,29 @@
 .today-observation {
   margin-top: 18px;
   color: #685a6f;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   line-height: 1.5;
+}
+
+.today-pending {
+  display: grid;
+  gap: 6px;
+  margin-top: 28px;
+  padding: 18px;
+  border: 1px solid #ead89a;
+  border-radius: 13px;
+  color: #5e4707;
+  background: #fff7d9;
+}
+
+.today-pending strong {
+  font-size: 0.84rem;
+}
+
+.today-pending span {
+  color: #735f27;
+  font-size: 0.72rem;
+  line-height: 1.45;
 }
 
 .source-row {
@@ -657,15 +678,6 @@
 .subject-copy {
   display: grid;
   gap: 8px;
-}
-
-.subject-status {
-  width: fit-content;
-  color: #c9f04a;
-  font-size: 0.55rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .subject-item h4 {
@@ -924,6 +936,23 @@
   font-size: 0.84rem;
 }
 
+.link-placeholder {
+  border-style: dashed;
+  background: #f8f3f9;
+}
+
+.link-placeholder .link-status {
+  width: fit-content;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: #66410b;
+  background: #f9e4ad;
+  font-size: 0.58rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .link-list span,
 .link-placeholder span {
   color: #76687d;
@@ -932,13 +961,31 @@
 }
 
 .contacts-section {
-  padding-top: 50px;
+  margin-bottom: 68px;
+  padding: 68px;
+  border: 1px solid rgba(90, 42, 120, 0.1);
+  border-radius: 28px;
+  background: #eee8f1;
 }
 
 .contacts {
   margin-left: 134px;
   display: grid;
   gap: 16px;
+}
+
+.contacts-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.contacts-heading strong {
+  font-size: 1rem;
+}
+
+.contacts-heading span {
+  color: #67596e;
+  font-size: 0.72rem;
 }
 
 .contacts input {
@@ -979,8 +1026,8 @@
 }
 
 .contacts a {
-  color: #76687d;
-  font-size: 0.65rem;
+  color: #65546d;
+  font-size: 0.69rem;
   overflow-wrap: anywhere;
 }
 
@@ -1076,6 +1123,10 @@
   color: #5a2a78;
   font-weight: 800;
   text-decoration: none;
+}
+
+.mobile-nav {
+  display: none;
 }
 
 button:focus-visible,
@@ -1199,10 +1250,15 @@ summary:focus-visible {
   }
 
   .dates-section,
-  .calculator-section {
+  .calculator-section,
+  .contacts-section {
     width: 100%;
     padding: 58px 16px;
     border-radius: 0;
+  }
+
+  .contacts-section {
+    margin-bottom: 0;
   }
 
   .notice-list,
@@ -1244,6 +1300,52 @@ summary:focus-visible {
   .other-section summary span {
     max-width: 150px;
     text-align: right;
+  }
+
+  .page {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-nav {
+    position: fixed;
+    z-index: 60;
+    right: 10px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    left: 10px;
+    min-height: 60px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    color: #fffaf4;
+    background: rgba(22, 10, 32, 0.94);
+    box-shadow: 0 14px 40px rgba(14, 5, 20, 0.38);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-nav a {
+    min-width: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 3px;
+    border-radius: 12px;
+    color: #d7cbdc;
+    font-size: 0.57rem;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .mobile-nav a:active {
+    color: #c9f04a;
+    background: rgba(201, 240, 74, 0.1);
+  }
+
+  .mobile-nav svg {
+    width: 20px;
+    height: 20px;
+    color: #c9f04a;
   }
 }
 
