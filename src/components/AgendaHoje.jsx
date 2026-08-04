@@ -58,20 +58,27 @@ function AgendaHoje() {
           </span>
         </div>
 
-        <div className="today-info">
-          <div>
-            <span>Horário</span>
-            <strong>{itemDeHoje?.horario ?? 'A confirmar'}</strong>
+        {confirmado ? (
+          <div className="today-info">
+            <div>
+              <span>Horário</span>
+              <strong>{itemDeHoje.horario}</strong>
+            </div>
+            <div>
+              <span>Sala</span>
+              <strong>{itemDeHoje.sala}</strong>
+            </div>
+            <div>
+              <span>Modalidade</span>
+              <strong>{itemDeHoje.modalidade ?? 'Não informada'}</strong>
+            </div>
           </div>
-          <div>
-            <span>Sala</span>
-            <strong>{itemDeHoje?.sala ?? 'A confirmar'}</strong>
+        ) : (
+          <div className="today-pending">
+            <strong>Horário, sala e modalidade ainda não foram divulgados.</strong>
+            <span>Assim que a grade sair, este quadro passa a mostrar a aula do dia.</span>
           </div>
-          <div>
-            <span>Modalidade</span>
-            <strong>{itemDeHoje?.modalidade ?? 'A confirmar'}</strong>
-          </div>
-        </div>
+        )}
 
         <p className="today-observation">
           {itemDeHoje?.observacao ?? 'Dia sem aula cadastrada ou grade ainda não publicada.'}
