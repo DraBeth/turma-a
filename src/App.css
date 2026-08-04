@@ -875,6 +875,42 @@
   text-align: center;
 }
 
+.calculator-projection {
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 7px 24px;
+  padding: 20px 24px;
+  border-radius: 14px;
+  color: #21102c;
+  background: #c9f04a;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+}
+
+.calculator-projection > span {
+  align-self: end;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.calculator-projection strong {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  line-height: 1;
+}
+
+.calculator-projection small {
+  align-self: start;
+  color: #493b16;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
 .calculator-result.ok {
   border-color: rgba(201, 240, 74, 0.4);
   background: rgba(201, 240, 74, 0.1);
@@ -1297,6 +1333,11 @@ summary:focus-visible {
   .contacts ul,
   .other-grid {
     grid-template-columns: 1fr;
+  }
+
+  .calculator-projection {
+    gap: 7px 16px;
+    padding: 18px;
   }
 
   .other-section summary {
