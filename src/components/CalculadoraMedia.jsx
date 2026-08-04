@@ -38,6 +38,7 @@ function CalculadoraMedia() {
     const notaAps = parseNota(aps)
     const notaSub = parseNota(n3)
     const mediaAlvo = parseNota(meta) ?? 6
+    const provaN2Informada = provaN2 !== null
     const n2Informada = provaN2 !== null || notaAps !== null
     const nota2 = n2Informada
       ? (provaN2 ?? 0) + (notaAps ?? 0)
@@ -54,6 +55,49 @@ function CalculadoraMedia() {
       }
     }
 
+    if (nota1 !== null && !provaN2Informada && notaSub === null) {
+      const n2Necessaria = (mediaAlvo - (nota1 * 0.4)) / 0.6
+      const apsConsiderada = notaAps ?? 1
+      const provaNecessaria = Math.max(n2Necessaria - apsConsiderada, 0)
+
+      if (n2Necessaria <= 0) {
+        return {
+          tipo: 'ok',
+          texto: `Com Prova N1 ${formatNota(nota1)}, a meta já está garantida mesmo com 0 na N2.`,
+        }
+      }
+
+      if (n2Necessaria > 10) {
+        const maiorMedia = (nota1 * 0.4) + 6
+
+        return {
+          tipo: 'alerta',
+          texto: `Não é possível chegar à média ${formatNota(mediaAlvo)}: seria necessário somar ${formatNota(n2Necessaria)} na N2, cujo máximo é 10. A maior média possível é ${formatNota(maiorMedia)}.`,
+        }
+      }
+
+      if (notaAps !== null && provaNecessaria > 9) {
+        const apsMinima = n2Necessaria - 9
+
+        return {
+          tipo: 'alerta',
+          texto: `Com APS ${formatNota(notaAps)}, a Prova N2 teria que ser ${formatNota(provaNecessaria)}, mas o máximo é 9. Para alcançar a meta, precisa de 9 na prova e pelo menos ${formatNota(apsMinima)} na APS.`,
+        }
+      }
+
+      if (notaAps !== null) {
+        return {
+          tipo: 'parcial',
+          texto: `Mínimo para média ${formatNota(mediaAlvo)}: ${formatNota(provaNecessaria)} na Prova N2, considerando ${formatNota(notaAps)} na APS.`,
+        }
+      }
+
+      return {
+        tipo: 'parcial',
+        texto: `Mínimo para média ${formatNota(mediaAlvo)}: somar ${formatNota(n2Necessaria)} na N2. Se fizer 1 na APS, precisa de ${formatNota(provaNecessaria)} na Prova N2.`,
+      }
+    }
+
     if (nota1 !== null && n2ComSub !== null) {
       const media = (nota1 * 0.4) + (n2ComSub * 0.6)
       const detalheSub = subUsada ? ' A SUB substituiu a N2.' : ''
@@ -63,39 +107,6 @@ function CalculadoraMedia() {
         texto: `Média: ${formatNota(media)}. ${
           media >= mediaAlvo ? 'Fechou a meta.' : `Faltaram ${formatNota(mediaAlvo - media)} ponto(s).`
         }${detalheSub}`,
-      }
-    }
-
-    if (nota1 !== null) {
-      const n2Necessaria = (mediaAlvo - (nota1 * 0.4)) / 0.6
-      const provaNecessaria = notaAps !== null ? n2Necessaria - notaAps : null
-
-      if (n2Necessaria <= 0) {
-        return {
-          tipo: 'ok',
-          texto: `Com N1 ${formatNota(nota1)}, a meta já está garantida mesmo com 0 na N2.`,
-        }
-      }
-
-      if (n2Necessaria > 10) {
-        return {
-          tipo: 'alerta',
-          texto: `Para média ${formatNota(mediaAlvo)}, precisaria de N2 ${formatNota(n2Necessaria)}.`,
-        }
-      }
-
-      if (provaNecessaria !== null && provaNecessaria > 9) {
-        return {
-          tipo: 'alerta',
-          texto: `Para média ${formatNota(mediaAlvo)}, precisa de N2 ${formatNota(n2Necessaria)}. Com APS ${formatNota(notaAps)}, a prova teria que ser ${formatNota(provaNecessaria)}.`,
-        }
-      }
-
-      return {
-        tipo: 'parcial',
-        texto: provaNecessaria !== null
-          ? `Para média ${formatNota(mediaAlvo)}, precisa de N2 ${formatNota(n2Necessaria)}: prova ${formatNota(Math.max(provaNecessaria, 0))} com APS ${formatNota(notaAps)}.`
-          : `Para média ${formatNota(mediaAlvo)}, precisa de N2 ${formatNota(n2Necessaria)}.`,
       }
     }
 
@@ -136,7 +147,7 @@ function CalculadoraMedia() {
 
       <div className="calculator-fields">
         <label>
-          <span>N1</span>
+          <span>Prova N1</span>
           <input
             inputMode="decimal"
             placeholder="ex.: 8,5"
