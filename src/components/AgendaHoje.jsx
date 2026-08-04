@@ -20,7 +20,8 @@ const diasAte = (dataIso, hoje) => {
   const [ano, mes, dia] = dataIso.split('-').map(Number)
   const destino = new Date(ano, mes - 1, dia)
   const inicioHoje = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate())
-  return Math.max(0, Math.ceil((destino - inicioHoje) / 86400000))
+  const dias = Math.max(0, Math.ceil((destino - inicioHoje) / 86400000))
+  return dias === 0 ? 'Hoje' : `Em ${dias} dias`
 }
 
 function FonteInfo({ item }) {
@@ -41,29 +42,23 @@ function AgendaHoje() {
   const excecaoDeHoje = excecoesAgenda.find((item) => item.data === hojeIso)
   const itemDaSemana = agendaSemanal.find((item) => item.dia === hoje.getDay())
   const itemDeHoje = excecaoDeHoje ?? itemDaSemana
-  const proximosEventos = eventos
-    .filter((evento) => new Date(`${evento.data}T23:59:59`) >= hoje)
-    .slice(0, 2)
-  const proximoEvento = proximosEventos[0]
+  const proximoEvento = eventos.find((evento) => new Date(`${evento.data}T23:59:59`) >= hoje)
   const confirmado = Boolean(itemDeHoje?.horario && itemDeHoje?.sala)
 
   return (
-    <div className="agenda" aria-label="Situação acadêmica de hoje">
-      <section className="today-panel">
-        <div className="today-topline">
-          <span className="tag">{excecaoDeHoje ? 'Mudança de hoje' : 'Hoje'}</span>
-          <span className={`confirmation ${confirmado ? 'confirmed' : ''}`}>
-            <i aria-hidden="true" /> {confirmado ? 'Confirmado' : 'A confirmar'}
+    <div className="agenda">
+      <article className="today-card">
+        <div className="today-header">
+          <div>
+            <span className="data-label">{formatarData(hojeIso, 'completo')}</span>
+            <h3>{itemDeHoje?.disciplina ?? 'Sem aula cadastrada'}</h3>
+          </div>
+          <span className={`status-badge ${confirmado ? 'status-confirmed' : 'status-pending'}`}>
+            {confirmado ? 'Confirmado' : 'A confirmar'}
           </span>
         </div>
 
-        <p className="today-date">{formatarData(hojeIso, 'completo')}</p>
-        <h2>{itemDeHoje?.disciplina ?? 'Sem aula cadastrada'}</h2>
-        <p className="today-note">
-          {itemDeHoje?.observacao ?? 'Dia sem aula cadastrada ou grade ainda não publicada.'}
-        </p>
-
-        <div className="today-meta">
+        <div className="today-info">
           <div>
             <span>Horário</span>
             <strong>{itemDeHoje?.horario ?? 'A confirmar'}</strong>
@@ -78,35 +73,29 @@ function AgendaHoje() {
           </div>
         </div>
 
+        <p className="today-observation">
+          {itemDeHoje?.observacao ?? 'Dia sem aula cadastrada ou grade ainda não publicada.'}
+        </p>
         <FonteInfo item={itemDeHoje} />
-      </section>
+      </article>
 
-      <aside className="agenda-status-card">
-        <span>Situação</span>
-        <strong>{confirmado ? 'Tudo certo' : 'Sem grade'}</strong>
-        <small>{confirmado ? 'Pode confiar neste painel.' : 'Aguardando publicação oficial.'}</small>
-        <span className="status-spark" aria-hidden="true">✦</span>
-      </aside>
-
-      <aside className="next-event-card">
-        <span className="event-label">Próximo marco</span>
+      <article className="next-card">
+        <span className="data-label">Próxima data</span>
         {proximoEvento ? (
           <>
-            <strong className="event-date">{formatarData(proximoEvento.data)}</strong>
+            <strong className="next-date">{formatarData(proximoEvento.data)}</strong>
             <h3>{proximoEvento.titulo}</h3>
             <p>{proximoEvento.detalhe}</p>
-            <div className="event-footer">
-              <span>em {diasAte(proximoEvento.data, hoje)} dias</span>
-              <span aria-hidden="true">→</span>
-            </div>
+            <span className="countdown">{diasAte(proximoEvento.data, hoje)}</span>
+            <FonteInfo item={proximoEvento} />
           </>
         ) : (
           <>
-            <h3>Nenhum evento cadastrado.</h3>
-            <p>Quando a turma souber, o portal também sabe.</p>
+            <h3>Nenhum evento cadastrado</h3>
+            <p>Novas datas aparecem aqui após confirmação.</p>
           </>
         )}
-      </aside>
+      </article>
     </div>
   )
 }
