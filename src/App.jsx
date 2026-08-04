@@ -8,12 +8,13 @@ import Disciplinas from './components/Disciplinas'
 import Entregas from './components/Entregas'
 import LinksUteis from './components/LinksUteis'
 import avisos from './data/avisos'
+import disciplinas from './data/disciplinas'
 
 const atalhos = [
   {
     id: 'hoje',
     titulo: 'Aulas e salas',
-    descricao: 'Situação de hoje, horário, sala e modalidade.',
+    descricao: 'Grade semanal ainda não divulgada.',
     destino: '#hoje',
     icone: 'calendar',
     termos: ['hoje', 'aula', 'sala', 'horário', 'ead', 'presencial', 'modalidade'],
@@ -21,8 +22,8 @@ const atalhos = [
   },
   {
     id: 'agenda',
-    titulo: 'Provas e datas',
-    descricao: 'Próximos eventos e avisos do semestre.',
+    titulo: 'Datas e avisos',
+    descricao: 'Próximas datas e informações do semestre.',
     destino: '#agenda',
     icone: 'check',
     termos: ['prova', 'n1', 'n2', 'sub', 'data', 'calendário', 'evento', 'avaliação'],
@@ -49,7 +50,15 @@ const atalhos = [
     descricao: 'Nomes e e-mails institucionais.',
     destino: '#contatos',
     icone: 'users',
-    termos: ['professor', 'professora', 'docente', 'contato', 'email', 'e-mail'],
+    termos: [
+      'professor',
+      'professora',
+      'docente',
+      'contato',
+      'email',
+      'e-mail',
+      ...disciplinas.map((disciplina) => disciplina.professor),
+    ],
   },
   {
     id: 'materiais',
@@ -65,7 +74,14 @@ const atalhos = [
     descricao: 'Matérias e docentes do 4º semestre.',
     destino: '#disciplinas',
     icone: 'book',
-    termos: ['disciplina', 'matéria', 'grade', 'semestre', 'docente'],
+    termos: [
+      'disciplina',
+      'matéria',
+      'grade',
+      'semestre',
+      'docente',
+      ...disciplinas.map((disciplina) => disciplina.nome),
+    ],
   },
 ]
 
@@ -107,6 +123,9 @@ function Icone({ nome }) {
   }
   if (nome === 'folder') {
     return <svg {...props}><path d="M3 5h6l2 2h10v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z" /><path d="M3 10h18" /></svg>
+  }
+  if (nome === 'home') {
+    return <svg {...props}><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10M9 20v-6h6v6" /></svg>
   }
   return <svg {...props}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
 }
@@ -188,7 +207,7 @@ function App() {
           )}
         </form>
 
-        <nav className="shortcut-grid" aria-label="Áreas do portal">
+        <nav className="shortcut-grid" id="atalhos" aria-label="Áreas do portal">
           {atalhos.map((atalho) => (
             <button
               type="button"
@@ -222,7 +241,7 @@ function App() {
         <header className="section-title">
           <span>Datas</span>
           <div>
-            <h2>Provas, eventos e avisos</h2>
+            <h2>Datas e avisos do semestre</h2>
             <p>Somente informações confirmadas ou marcadas como pendentes.</p>
           </div>
         </header>
@@ -307,6 +326,14 @@ function App() {
           </div>
         </details>
       </section>
+
+      <nav className="mobile-nav" aria-label="Atalhos fixos">
+        <a href="#atalhos"><Icone nome="home" /><span>Início</span></a>
+        <a href="#hoje"><Icone nome="calendar" /><span>Hoje</span></a>
+        <a href="#agenda"><Icone nome="check" /><span>Datas</span></a>
+        <a href="#entregas"><Icone nome="clipboard" /><span>APS</span></a>
+        <a href="#materiais"><Icone nome="folder" /><span>Materiais</span></a>
+      </nav>
 
       <footer className="site-footer">
         <span>Turma A · Direito · 2026.2</span>
