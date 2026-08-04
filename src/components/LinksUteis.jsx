@@ -7,6 +7,7 @@ function LinksUteis() {
         link.url === '#'
           ? (
             <div className="link-placeholder" key={link.titulo}>
+              {link.status && <small className="link-status">{link.status}</small>}
               <strong>{link.titulo}</strong>
               <span>{link.descricao}</span>
             </div>
