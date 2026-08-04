@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import contatos from '../data/contatos'
+import disciplinas from '../data/disciplinas'
 
 const normalizar = (texto) =>
   texto
@@ -10,17 +11,31 @@ const normalizar = (texto) =>
 function Contatos() {
   const [busca, setBusca] = useState('')
 
+  const contatosDoSemestre = useMemo(() => disciplinas
+    .filter((disciplina) => disciplina.professor !== 'A definir')
+    .map((disciplina) => contatos.find((contato) => contato.nome === disciplina.professor))
+    .filter(Boolean), [])
+
   const contatosFiltrados = useMemo(() => {
     const termo = normalizar(busca)
-    if (!termo) return contatos.slice(0, 8)
+    if (!termo) return contatosDoSemestre
 
     return contatos.filter((contato) =>
       normalizar(`${contato.nome} ${contato.email}`).includes(termo)
     )
-  }, [busca])
+  }, [busca, contatosDoSemestre])
 
   return (
     <div className="contacts">
+      <div className="contacts-heading">
+        <strong>{busca ? 'Resultados da busca' : 'Professores deste semestre'}</strong>
+        <span>
+          {busca
+            ? 'A busca consulta todo o diretório docente.'
+            : `${contatosDoSemestre.length} docentes já definidos com e-mail cadastrado.`}
+        </span>
+      </div>
+
       <input
         aria-label="Buscar contato"
         placeholder="Buscar professor ou e-mail"
@@ -37,7 +52,7 @@ function Contatos() {
         ))}
       </ul>
 
-      {!busca && <small>Mostrando os 8 primeiros. Use a busca para filtrar a lista completa.</small>}
+      {!busca && <small>Para encontrar professores de outros semestres, use a busca acima.</small>}
     </div>
   )
 }
