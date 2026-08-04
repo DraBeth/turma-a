@@ -51,7 +51,7 @@ function CalculadoraMedia() {
     if (nota1 === null && n2ComSub === null) {
       return {
         tipo: 'vazio',
-        texto: 'Preencha a N1, a N2 e/ou a SUB para calcular.',
+        texto: 'Preencha a Prova N1, a Prova N2 e/ou a SUB para calcular.',
       }
     }
 
@@ -63,7 +63,11 @@ function CalculadoraMedia() {
       if (n2Necessaria <= 0) {
         return {
           tipo: 'ok',
-          texto: `Com Prova N1 ${formatNota(nota1)}, a meta já está garantida mesmo com 0 na N2.`,
+          texto: `Com Prova N1 ${formatNota(nota1)}, a meta já está garantida.`,
+          projecao: {
+            nota: '0',
+            detalhe: `A Prova N1 já garante a média ${formatNota(mediaAlvo)}.`,
+          },
         }
       }
 
@@ -87,14 +91,22 @@ function CalculadoraMedia() {
 
       if (notaAps !== null) {
         return {
-          tipo: 'parcial',
-          texto: `Mínimo para média ${formatNota(mediaAlvo)}: ${formatNota(provaNecessaria)} na Prova N2, considerando ${formatNota(notaAps)} na APS.`,
+          tipo: 'vazio',
+          texto: 'Preencha a Prova N2 para calcular a média final.',
+          projecao: {
+            nota: formatNota(provaNecessaria),
+            detalhe: `Considerando ${formatNota(notaAps)} na APS para fechar média ${formatNota(mediaAlvo)}.`,
+          },
         }
       }
 
       return {
-        tipo: 'parcial',
-        texto: `Mínimo para média ${formatNota(mediaAlvo)}: somar ${formatNota(n2Necessaria)} na N2. Se fizer 1 na APS, precisa de ${formatNota(provaNecessaria)} na Prova N2.`,
+        tipo: 'vazio',
+        texto: 'Preencha a Prova N2 e a APS para calcular a média final.',
+        projecao: {
+          nota: formatNota(provaNecessaria),
+          detalhe: `Considerando 1 ponto na APS para fechar média ${formatNota(mediaAlvo)}.`,
+        },
       }
     }
 
@@ -195,6 +207,14 @@ function CalculadoraMedia() {
           />
         </label>
       </div>
+
+      {resultado.projecao && (
+        <div className="calculator-projection" role="status" aria-live="polite">
+          <span>Nota mínima necessária na Prova N2</span>
+          <strong>{resultado.projecao.nota}</strong>
+          <small>{resultado.projecao.detalhe}</small>
+        </div>
+      )}
 
       <output className={`calculator-result ${resultado.tipo}`}>
         {resultado.texto}
