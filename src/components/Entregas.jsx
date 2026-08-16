@@ -9,6 +9,15 @@ const formatarData = (dataIso) => {
 }
 
 function Entregas() {
+  if (entregas.length === 0) {
+    return (
+      <div className="empty-state">
+        <strong>Nenhuma APS ou entrega cadastrada.</strong>
+        <span>Os trabalhos entram aqui quando forem oficialmente divulgados.</span>
+      </div>
+    )
+  }
+
   return (
     <div className="delivery-list">
       {entregas.map((entrega) => (

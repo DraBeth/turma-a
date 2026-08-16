@@ -38,6 +38,7 @@ function CalculadoraMedia() {
     const notaAps = parseNota(aps)
     const notaSub = parseNota(n3)
     const mediaAlvo = parseNota(meta) ?? 6
+    const provaN2Informada = provaN2 !== null
     const n2Informada = provaN2 !== null || notaAps !== null
     const nota2 = n2Informada
       ? (provaN2 ?? 0) + (notaAps ?? 0)
@@ -50,7 +51,62 @@ function CalculadoraMedia() {
     if (nota1 === null && n2ComSub === null) {
       return {
         tipo: 'vazio',
-        texto: 'Preencha a N1, a N2 e/ou a SUB para calcular.',
+        texto: 'Preencha a Prova N1, a Prova N2 e/ou a SUB para calcular.',
+      }
+    }
+
+    if (nota1 !== null && !provaN2Informada && notaSub === null) {
+      const n2Necessaria = (mediaAlvo - (nota1 * 0.4)) / 0.6
+      const apsConsiderada = notaAps ?? 1
+      const provaNecessaria = Math.max(n2Necessaria - apsConsiderada, 0)
+
+      if (n2Necessaria <= 0) {
+        return {
+          tipo: 'ok',
+          texto: `Com Prova N1 ${formatNota(nota1)}, a meta já está garantida.`,
+          projecao: {
+            nota: '0',
+            detalhe: `A Prova N1 já garante a média ${formatNota(mediaAlvo)}.`,
+          },
+        }
+      }
+
+      if (n2Necessaria > 10) {
+        const maiorMedia = (nota1 * 0.4) + 6
+
+        return {
+          tipo: 'alerta',
+          texto: `Não é possível chegar à média ${formatNota(mediaAlvo)}: seria necessário somar ${formatNota(n2Necessaria)} na N2, cujo máximo é 10. A maior média possível é ${formatNota(maiorMedia)}.`,
+        }
+      }
+
+      if (notaAps !== null && provaNecessaria > 9) {
+        const apsMinima = n2Necessaria - 9
+
+        return {
+          tipo: 'alerta',
+          texto: `Com APS ${formatNota(notaAps)}, a Prova N2 teria que ser ${formatNota(provaNecessaria)}, mas o máximo é 9. Para alcançar a meta, precisa de 9 na prova e pelo menos ${formatNota(apsMinima)} na APS.`,
+        }
+      }
+
+      if (notaAps !== null) {
+        return {
+          tipo: 'vazio',
+          texto: 'Preencha a Prova N2 para calcular a média final.',
+          projecao: {
+            nota: formatNota(provaNecessaria),
+            detalhe: `Considerando ${formatNota(notaAps)} na APS para fechar média ${formatNota(mediaAlvo)}.`,
+          },
+        }
+      }
+
+      return {
+        tipo: 'vazio',
+        texto: 'Preencha a Prova N2 e a APS para calcular a média final.',
+        projecao: {
+          nota: formatNota(provaNecessaria),
+          detalhe: `Considerando 1 ponto na APS para fechar média ${formatNota(mediaAlvo)}.`,
+        },
       }
     }
 
@@ -63,39 +119,6 @@ function CalculadoraMedia() {
         texto: `Média: ${formatNota(media)}. ${
           media >= mediaAlvo ? 'Fechou a meta.' : `Faltaram ${formatNota(mediaAlvo - media)} ponto(s).`
         }${detalheSub}`,
-      }
-    }
-
-    if (nota1 !== null) {
-      const n2Necessaria = (mediaAlvo - (nota1 * 0.4)) / 0.6
-      const provaNecessaria = notaAps !== null ? n2Necessaria - notaAps : null
-
-      if (n2Necessaria <= 0) {
-        return {
-          tipo: 'ok',
-          texto: `Com N1 ${formatNota(nota1)}, a meta já está garantida mesmo com 0 na N2.`,
-        }
-      }
-
-      if (n2Necessaria > 10) {
-        return {
-          tipo: 'alerta',
-          texto: `Para média ${formatNota(mediaAlvo)}, precisaria de N2 ${formatNota(n2Necessaria)}.`,
-        }
-      }
-
-      if (provaNecessaria !== null && provaNecessaria > 9) {
-        return {
-          tipo: 'alerta',
-          texto: `Para média ${formatNota(mediaAlvo)}, precisa de N2 ${formatNota(n2Necessaria)}. Com APS ${formatNota(notaAps)}, a prova teria que ser ${formatNota(provaNecessaria)}.`,
-        }
-      }
-
-      return {
-        tipo: 'parcial',
-        texto: provaNecessaria !== null
-          ? `Para média ${formatNota(mediaAlvo)}, precisa de N2 ${formatNota(n2Necessaria)}: prova ${formatNota(Math.max(provaNecessaria, 0))} com APS ${formatNota(notaAps)}.`
-          : `Para média ${formatNota(mediaAlvo)}, precisa de N2 ${formatNota(n2Necessaria)}.`,
       }
     }
 
@@ -136,7 +159,7 @@ function CalculadoraMedia() {
 
       <div className="calculator-fields">
         <label>
-          <span>N1</span>
+          <span>Prova N1</span>
           <input
             inputMode="decimal"
             placeholder="ex.: 8,5"
@@ -184,6 +207,14 @@ function CalculadoraMedia() {
           />
         </label>
       </div>
+
+      {resultado.projecao && (
+        <div className="calculator-projection" role="status" aria-live="polite">
+          <span>Nota mínima necessária na Prova N2</span>
+          <strong>{resultado.projecao.nota}</strong>
+          <small>{resultado.projecao.detalhe}</small>
+        </div>
+      )}
 
       <output className={`calculator-result ${resultado.tipo}`}>
         {resultado.texto}
