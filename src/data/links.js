@@ -1,9 +1,8 @@
 const links = [
   {
     titulo: 'Drive da Turma',
-    descricao: 'O link direto ainda não foi cadastrado aqui. Por enquanto, ele continua na descrição do grupo.',
-    status: 'Pendente no portal',
-    url: '#',
+    descricao: 'Materiais e slides organizados por semestre. Acesso para quem recebeu o link.',
+    url: 'https://drive.google.com/drive/folders/1u7RDQjwvG800NddUJiS9U61ET1T6_JPu?usp=drive_link',
   },
   {
     titulo: 'Lyceum',

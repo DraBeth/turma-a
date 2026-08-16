@@ -14,10 +14,14 @@ const atalhos = [
   {
     id: 'hoje',
     titulo: 'Aulas e salas',
-    descricao: 'Grade semanal ainda não divulgada.',
+    descricao: 'Dias, horários, prédios e salas.',
     destino: '#hoje',
     icone: 'calendar',
-    termos: ['hoje', 'aula', 'sala', 'horário', 'ead', 'presencial', 'modalidade'],
+    termos: [
+      'hoje', 'aula', 'sala', 'horário', 'ead', 'presencial', 'modalidade',
+      'segunda', 'terça', 'quarta', 'quinta', 'sexta', '19h', '21h50',
+      'prédio 17', 'prédio 11', 'sala 103', 'sala 7', 'casa do direito',
+    ],
     destaque: true,
   },
   {
@@ -47,7 +51,7 @@ const atalhos = [
   {
     id: 'contatos',
     titulo: 'Professores',
-    descricao: 'Nomes e e-mails institucionais.',
+    descricao: 'Docentes atuais e e-mails institucionais.',
     destino: '#contatos',
     icone: 'users',
     termos: [

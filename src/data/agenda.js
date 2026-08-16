@@ -1,9 +1,48 @@
-export const agendaSemanal = [1, 2, 3, 4, 5].map((dia) => ({
-  dia,
-  disciplina: 'Grade semanal ainda não divulgada',
-  observacao: 'Dias, horários, salas e modalidades estão aguardando confirmação.',
+export const agendaSemanal = [
+  {
+    dia: 1,
+    disciplina: 'Direito de Posse e Propriedade e Ritos Especiais',
+    horario: '19h–21h50',
+    sala: 'Sala 103 · Prédio 17',
+    modalidade: 'Presencial',
+    observacao: 'Casa do Direito · 1º andar · Professor Felipe Carvas.',
+  },
+  {
+    dia: 2,
+    disciplina: 'Direitos Sociais Coletivos e Protetivos',
+    horario: '19h–21h50',
+    sala: 'Sala 103 · Prédio 17',
+    modalidade: 'Presencial',
+    observacao: 'Casa do Direito · 1º andar · Professora Cristiane Fatima Grano Haik.',
+  },
+  {
+    dia: 3,
+    disciplina: 'Crimes em Espécie II',
+    horario: '19h–21h50',
+    sala: 'Sala 103 · Prédio 17',
+    modalidade: 'Presencial',
+    observacao: 'Casa do Direito · 1º andar · Professor Ederson Silva Balduino.',
+  },
+  {
+    dia: 4,
+    disciplina: 'Direito das Empresas Aplicado',
+    horario: '19h–21h50',
+    sala: 'Sala 103 · Prédio 17',
+    modalidade: 'Presencial',
+    observacao: 'Casa do Direito · 1º andar · Professor Rodolfo de Moraes Machado Neto.',
+  },
+  {
+    dia: 5,
+    disciplina: 'Processo Penal I',
+    horario: '19h–21h50',
+    sala: 'Sala 7 · Prédio 11',
+    modalidade: 'Presencial',
+    observacao: 'Casa do Direito · 4º andar · Professora Lilian Barcalobre Manoel.',
+  },
+].map((item) => ({
+  ...item,
   fonte: 'Portal do Aluno',
-  atualizadoEm: '2026-08-03',
+  atualizadoEm: '2026-08-14',
   atualizadoPor: 'Beth',
 }))
 

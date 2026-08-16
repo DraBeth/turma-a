@@ -31,8 +31,8 @@ function Contatos() {
         <strong>{busca ? 'Resultados da busca' : 'Professores deste semestre'}</strong>
         <span>
           {busca
-            ? 'A busca consulta todo o diretório docente.'
-            : `${contatosDoSemestre.length} docentes já definidos com e-mail cadastrado.`}
+            ? 'A busca consulta somente os professores presenciais deste semestre.'
+            : `${contatosDoSemestre.length} professores presenciais com e-mail cadastrado.`}
         </span>
       </div>
 
@@ -52,7 +52,7 @@ function Contatos() {
         ))}
       </ul>
 
-      {!busca && <small>Para encontrar professores de outros semestres, use a busca acima.</small>}
+      {!busca && <small>O contato da professora EaD acontece pela própria disciplina online.</small>}
     </div>
   )
 }

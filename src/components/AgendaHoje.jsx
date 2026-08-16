@@ -43,6 +43,7 @@ function AgendaHoje() {
   const itemDaSemana = agendaSemanal.find((item) => item.dia === hoje.getDay())
   const itemDeHoje = excecaoDeHoje ?? itemDaSemana
   const proximoEvento = eventos.find((evento) => new Date(`${evento.data}T23:59:59`) >= hoje)
+  const temAula = Boolean(itemDeHoje)
   const confirmado = Boolean(itemDeHoje?.horario && itemDeHoje?.sala)
 
   return (
@@ -53,8 +54,8 @@ function AgendaHoje() {
             <span className="data-label">{formatarData(hojeIso, 'completo')}</span>
             <h3>{itemDeHoje?.disciplina ?? 'Sem aula cadastrada'}</h3>
           </div>
-          <span className={`status-badge ${confirmado ? 'status-confirmed' : 'status-pending'}`}>
-            {confirmado ? 'Confirmado' : 'A confirmar'}
+          <span className={`status-badge ${confirmado ? 'status-confirmed' : temAula ? 'status-pending' : 'status-no-class'}`}>
+            {confirmado ? 'Confirmado' : temAula ? 'A confirmar' : 'Sem aula'}
           </span>
         </div>
 
@@ -73,15 +74,20 @@ function AgendaHoje() {
               <strong>{itemDeHoje.modalidade ?? 'Não informada'}</strong>
             </div>
           </div>
-        ) : (
+        ) : temAula ? (
           <div className="today-pending">
-            <strong>Horário, sala e modalidade ainda não foram divulgados.</strong>
-            <span>Assim que a grade sair, este quadro passa a mostrar a aula do dia.</span>
+            <strong>Os detalhes desta aula ainda precisam de confirmação.</strong>
+            <span>Consulte os avisos da turma antes de sair.</span>
+          </div>
+        ) : (
+          <div className="today-pending today-no-class">
+            <strong>Não há aula presencial cadastrada para hoje.</strong>
+            <span>Metodologia Científica é EaD e pode ser acessada pela disciplina online.</span>
           </div>
         )}
 
         <p className="today-observation">
-          {itemDeHoje?.observacao ?? 'Dia sem aula cadastrada ou grade ainda não publicada.'}
+          {itemDeHoje?.observacao ?? 'A grade presencial acontece de segunda a sexta-feira.'}
         </p>
         <FonteInfo item={itemDeHoje} />
       </article>

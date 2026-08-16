@@ -36,7 +36,12 @@ function Disciplinas() {
                     <strong>{disciplina.professor}</strong>
                   )}
                 </p>
-                {disciplina.observacao && <small>{disciplina.observacao}</small>}
+                <small>
+                  {disciplina.dia}
+                  {disciplina.horario ? ` · ${disciplina.horario}` : ''}
+                  {` · ${disciplina.modalidade}`}
+                </small>
+                <small>{disciplina.local}</small>
               </div>
               <span className="subject-arrow" aria-hidden="true">↗</span>
             </article>
@@ -45,12 +50,12 @@ function Disciplinas() {
       </div>
 
       <p className="subjects-note">
-        Dias, salas e modalidades presencial/EaD ainda não foram divulgados.
+        Cinco disciplinas presenciais e uma EaD. O contato de Metodologia Científica acontece pela própria disciplina online.
       </p>
 
       <div className="source-row">
         <span>Fonte: Portal do Aluno</span>
-        <span>Atualizado em: 03/08</span>
+        <span>Atualizado em: 14/08</span>
         <span>Por: Beth</span>
       </div>
     </div>
